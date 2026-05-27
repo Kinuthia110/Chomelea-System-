@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; color: #111827; }
+    .header { border-bottom: 4px solid #f97316; padding-bottom: 15px; margin-bottom: 30px; }
+    .brand { font-size: 28px; font-weight: bold; }
+    .muted { color: #6b7280; font-size: 13px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th { background: #111827; color: white; padding: 10px; text-align: left; }
+    td { border: 1px solid #e5e7eb; padding: 10px; }
+    .totals { margin-top: 25px; width: 320px; margin-left: auto; }
+    .totals div { display: flex; justify-content: space-between; padding: 7px 0; }
+    .grand { font-size: 18px; font-weight: bold; border-top: 2px solid #111827; padding-top: 10px; }
+    .footer { margin-top: 45px; font-size: 12px; color: #6b7280; border-top: 1px solid #e5e7eb; padding-top: 15px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="brand">CHOMELEA WELDING & FABRICATION</div>
+    <div class="muted">Kitengela, Kenya</div>
+    <div class="muted">Invoice Document</div>
+  </div>
+
+  <h2>Invoice</h2>
+
+  <p><strong>Invoice No:</strong> <%= invoice.invoiceNumber %></p>
+  <p><strong>Payment Status:</strong> <%= invoice.paymentStatus %></p>
+  <p><strong>Invoice Status:</strong> <%= invoice.invoiceStatus %></p>
+  <p><strong>Date:</strong> <%= new Date(invoice.createdAt).toLocaleDateString() %></p>
+
+  <h3>Customer Details</h3>
+  <p><strong>Name:</strong> <%= invoice.customer?.fullName || "" %></p>
+  <p><strong>Phone:</strong> <%= invoice.customer?.phone || "" %></p>
+  <p><strong>Location:</strong> <%= invoice.customer?.location || "" %></p>
+
+  <h3>Items</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Qty</th>
+        <th>Unit Price</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% invoice.items.forEach(item => { %>
+        <tr>
+          <td><%= item.itemName %></td>
+          <td><%= item.quantity %></td>
+          <td>KES <%= item.unitPrice.toLocaleString() %></td>
+          <td>KES <%= item.total.toLocaleString() %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <div class="totals">
+    <div><span>Subtotal:</span><span>KES <%= invoice.subtotal.toLocaleString() %></span></div>
+    <div><span>Tax:</span><span>KES <%= invoice.tax.toLocaleString() %></span></div>
+    <div class="grand"><span>Grand Total:</span><span>KES <%= invoice.grandTotal.toLocaleString() %></span></div>
+    <div><span>Amount Paid:</span><span>KES <%= invoice.amountPaid.toLocaleString() %></span></div>
+    <div><span>Balance:</span><span>KES <%= invoice.balance.toLocaleString() %></span></div>
+  </div>
+
+  <h3>Notes</h3>
+  <p><%= invoice.notes || "No notes provided." %></p>
+
+  <div class="footer">
+    Thank you for choosing CHOMELEA Welding & Fabrication.
+  </div>
+</body>
+</html>

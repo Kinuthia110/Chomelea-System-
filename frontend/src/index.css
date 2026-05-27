@@ -1,0 +1,17 @@
+:root {
+  --primary-color: #F97316;
+  --background-color: #0D1117;
+  --card-color: #161B22;
+}
+@import "tailwindcss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0D1117;
+  font-family: Arial, sans-serif;
+}

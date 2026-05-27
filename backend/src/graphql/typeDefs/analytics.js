@@ -1,0 +1,53 @@
+const analyticsType = `#graphql
+
+type RevenueSummary {
+  totalInvoiceValue: Float
+  totalRevenueReceived: Float
+  outstandingBalance: Float
+  paidInvoices: Int
+  partialInvoices: Int
+  unpaidInvoices: Int
+}
+
+type DashboardStats {
+  totalCustomers: Int
+  totalProjects: Int
+  activeProjects: Int
+  completedProjects: Int
+  totalQuotations: Int
+  approvedQuotations: Int
+  totalInvoices: Int
+  totalPayments: Int
+  lowStockCount: Int
+}
+
+type MonthlyRevenue {
+  month: String
+  invoiceValue: Float
+  revenueReceived: Float
+  outstandingBalance: Float
+}
+
+type ProjectStatusCount {
+  status: String
+  count: Int
+}
+
+type RecentActivity {
+  type: String
+  title: String
+  description: String
+  createdAt: String
+}
+
+type Query {
+  revenueSummary: RevenueSummary
+  dashboardStats: DashboardStats
+  monthlyRevenue: [MonthlyRevenue]
+  projectStatusCounts: [ProjectStatusCount]
+  recentActivities: [RecentActivity]
+}
+
+`;
+
+export default analyticsType;
